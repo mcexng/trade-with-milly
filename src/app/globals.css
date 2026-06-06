@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-black: #050505;
+  --color-brand-midnight: #12100e;
+  --color-brand-dark: #1a1714;
+  --color-brand-purple: #d4af37;   /* Primary Gold */
+  --color-brand-cyan: #f4e3c5;    /* Warm Beige / Light Gold */
+  --color-brand-neon: #e5c158;    /* Accent Gold */
+  --color-brand-silver: #e2e8f0;
+  
+  --color-background: var(--color-brand-black);
+  --color-foreground: var(--color-brand-silver);
+  
+  --font-sans: var(--font-inter), sans-serif;
+
+  /* Marquee scrolls left continuously — duplicated list gives seamless loop */
+  --animate-marquee: marquee 35s linear infinite;
+
+  @keyframes marquee {
+    0%   { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-brand-black);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(244, 227, 197, 0.1) 0px, transparent 50%);
+  color: var(--color-brand-silver);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Utilities */
+@layer utilities {
+  .glass {
+    background: rgba(18, 16, 14, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 175, 55, 0.08);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .glass-card {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.01) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-top: 1px solid rgba(244, 227, 197, 0.1);
+    border-left: 1px solid rgba(244, 227, 197, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 1.5rem;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 15px rgba(244, 227, 197, 0.5);
+  }
+  
+  .text-glow-purple {
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+  }
+  
+  .text-gradient {
+    background: linear-gradient(to right, #f4e3c5, #d4af37);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* Hide scrollbar for clean look */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-brand-black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-dark);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-purple);
+}
