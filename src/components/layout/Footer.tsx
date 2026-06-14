@@ -79,7 +79,7 @@ export function Footer() {
                 </Link>
               </li>
               <li className="text-xs break-all opacity-70">
-                support@tradewithmilly.com
+                millycryptoexch@gmail.com
               </li>
             </ul>
           </div>

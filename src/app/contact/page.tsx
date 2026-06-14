@@ -59,7 +59,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <div className="text-sm text-[var(--color-brand-silver)]/70">Email</div>
-                        <div className="text-lg font-bold text-white">support@tradewithmilly.com</div>
+                        <div className="text-lg font-bold text-white">millycryptoexch@gmail.com</div>
                       </div>
                     </div>
                   </div>
