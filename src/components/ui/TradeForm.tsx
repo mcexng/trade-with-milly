@@ -66,11 +66,11 @@ Please process my transaction.`;
 
   return (
     <div
-      className="w-full glass rounded-3xl p-6 md:p-10 border border-white/10 relative overflow-hidden"
+      className="w-full glass rounded-3xl border border-white/10 relative overflow-hidden"
       id="trade-form"
     >
       {/* Rate Display Banner */}
-      <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[var(--color-brand-cyan)]/20 to-[var(--color-brand-purple)]/20 border-b border-white/5 p-3 flex flex-wrap justify-center items-center gap-3 text-sm font-medium">
+      <div className="w-full bg-gradient-to-r from-[var(--color-brand-cyan)]/20 to-[var(--color-brand-purple)]/20 border-b border-white/5 p-3 flex flex-col sm:flex-row flex-wrap justify-center items-center gap-3 text-sm font-medium">
         <span className="flex items-center gap-2 shrink-0">
           <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
           Live Rates (NGN/$)
@@ -78,7 +78,7 @@ Please process my transaction.`;
         {loading ? (
           <RefreshCw className="w-4 h-4 animate-spin text-[var(--color-brand-silver)]" />
         ) : rates ? (
-          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-x-4 gap-y-1">
             <span className="text-[var(--color-brand-silver)]">
               USDT: Buy <strong className="text-green-400">₦{rates["USDT"]?.buy}</strong> / Sell <strong className="text-red-400">₦{rates["USDT"]?.sell}</strong>
             </span>
@@ -96,7 +96,7 @@ Please process my transaction.`;
         )}
       </div>
 
-      <div className="pt-16 space-y-8">
+      <div className="p-6 md:p-10 space-y-8">
         <div>
           <h2 className="text-3xl font-black text-white mb-2">Trade Calculator</h2>
           <p className="text-[var(--color-brand-silver)]/80 text-sm">
