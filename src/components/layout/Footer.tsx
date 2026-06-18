@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AtSign, Camera, PlaySquare, Briefcase, Send, MessageCircle } from "lucide-react";
+import { Camera, Video, Facebook, Send, MessageCircle } from "lucide-react";
 
 export function Footer() {
   return (
@@ -22,15 +22,34 @@ export function Footer() {
               Professional cryptocurrency trader, vendor, mentor, and digital asset consultant helping you navigate the crypto markets since 2016.
             </p>
             <div className="flex space-x-3 pt-1">
-              {[AtSign, Camera, PlaySquare, Briefcase].map((Icon, i) => (
-                <Link
-                  key={i}
-                  href="#"
-                  className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#d4af37]/20 hover:border-[#d4af37]/40 border border-white/10 transition-colors"
-                >
-                  <Icon className="w-4 h-4 text-[var(--color-brand-silver)]" />
-                </Link>
-              ))}
+              <Link
+                href="https://instagram.com/mcex.ng"
+                target="_blank"
+                className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#d4af37]/20 hover:border-[#d4af37]/40 border border-white/10 transition-colors"
+              >
+                <Camera className="w-4 h-4 text-[var(--color-brand-silver)]" />
+              </Link>
+              <Link
+                href="https://tiktok.com/@mcex.ng"
+                target="_blank"
+                className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#d4af37]/20 hover:border-[#d4af37]/40 border border-white/10 transition-colors"
+              >
+                <Video className="w-4 h-4 text-[var(--color-brand-silver)]" />
+              </Link>
+              <Link
+                href="https://facebook.com/millycryptoexchange"
+                target="_blank"
+                className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#d4af37]/20 hover:border-[#d4af37]/40 border border-white/10 transition-colors"
+              >
+                <Facebook className="w-4 h-4 text-[var(--color-brand-silver)]" />
+              </Link>
+              <Link
+                href="https://t.me/mcex_ng"
+                target="_blank"
+                className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#d4af37]/20 hover:border-[#d4af37]/40 border border-white/10 transition-colors"
+              >
+                <Send className="w-4 h-4 text-[var(--color-brand-silver)]" />
+              </Link>
             </div>
           </div>
 
@@ -110,9 +129,9 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--color-brand-silver)] opacity-60">
           <p>© {new Date().getFullYear()} Trade With Milly. All rights reserved.</p>
           <div className="flex gap-4">
-            <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
-            <Link href="#" className="hover:text-white transition-colors">Risk Warning</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+            <Link href="/risk" className="hover:text-white transition-colors">Risk Warning</Link>
           </div>
         </div>
       </div>
