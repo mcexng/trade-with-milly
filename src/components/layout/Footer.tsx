@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Camera, Video, Facebook, Send, MessageCircle } from "lucide-react";
+import { Camera, Video, AtSign, Send, MessageCircle } from "lucide-react";
 
 export function Footer() {
   return (
@@ -41,7 +41,7 @@ export function Footer() {
                 target="_blank"
                 className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#d4af37]/20 hover:border-[#d4af37]/40 border border-white/10 transition-colors"
               >
-                <Facebook className="w-4 h-4 text-[var(--color-brand-silver)]" />
+                <AtSign className="w-4 h-4 text-[var(--color-brand-silver)]" />
               </Link>
               <Link
                 href="https://t.me/mcex_ng"
