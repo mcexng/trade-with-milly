@@ -55,10 +55,10 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {[
-              { icon: Award, label: "Years Experience", value: "8+" },
+              { icon: Award, label: "Years Experience", value: "10+" },
               { icon: TrendingUp, label: "Successful Trades", value: "10k+" },
-              { icon: Users, label: "Active Students", value: "2,500+" },
-              { icon: Zap, label: "Signal Subscribers", value: "5,000+" },
+              { icon: Users, label: "Active Students", value: "200+" },
+              { icon: Zap, label: "Signal Subscribers", value: "500+" },
             ].map((stat, i) => (
               <AnimatedSection key={i} delay={i * 0.1}>
                 <GlassCard className="p-8 text-center flex flex-col items-center justify-center h-full group" glow glowColor={i % 2 === 0 ? "cyan" : "purple"}>
