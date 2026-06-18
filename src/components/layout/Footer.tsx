@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Send, MessageCircle } from "lucide-react";
-import { FaInstagram, FaTiktok, FaFacebook, FaTelegramPlane } from "react-icons/fa6";
+import { FaInstagram, FaTiktok, FaFacebook, FaTelegram } from "react-icons/fa6";
 
 export function Footer() {
   return (
@@ -49,7 +49,7 @@ export function Footer() {
                 target="_blank"
                 className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#d4af37]/20 hover:border-[#d4af37]/40 border border-white/10 transition-colors"
               >
-                <FaTelegramPlane className="w-4 h-4 text-[var(--color-brand-silver)]" />
+                <FaTelegram className="w-4 h-4 text-[var(--color-brand-silver)]" />
               </Link>
             </div>
           </div>
