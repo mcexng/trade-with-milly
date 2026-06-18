@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useImperativeHandle, forwardRef } from "react";
 import Link from "next/link";
 import { ArrowRight, RefreshCw, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+type TradableCrypto = "USDT" | "BTC" | "ETH" | "OTHERS";
 
 type Rates = {
   [key: string]: {
@@ -12,19 +14,27 @@ type Rates = {
   };
 };
 
-export function TradeForm() {
+export type TradeFormHandle = {
+  setCrypto: (c: TradableCrypto) => void;
+};
+
+export const TradeForm = forwardRef<TradeFormHandle>((_, ref) => {
   const [rates, setRates] = useState<Rates | null>(null);
   const [loading, setLoading] = useState(true);
-  
+
   const [tradeType, setTradeType] = useState<"buy" | "sell">("buy");
-  const [crypto, setCrypto] = useState<"USDT" | "BTC" | "ETH" | "OTHERS">("USDT");
+  const [crypto, setCryptoState] = useState<TradableCrypto>("USDT");
   const [amount, setAmount] = useState<string>("");
 
+  useImperativeHandle(ref, () => ({
+    setCrypto: (c: TradableCrypto) => {
+      setCryptoState(c);
+    },
+  }));
+
   useEffect(() => {
-    // Fetch rates from the public rates.json file
     const fetchRates = async () => {
       try {
-        // Add a timestamp to prevent aggressive caching
         const res = await fetch(`/rates.json?t=${new Date().getTime()}`);
         if (!res.ok) throw new Error("Failed to load rates");
         const data = await res.json();
@@ -35,17 +45,15 @@ export function TradeForm() {
         setLoading(false);
       }
     };
-    
+
     fetchRates();
   }, []);
 
   const currentRate = rates ? rates[crypto]?.[tradeType] : 0;
-  
-  // Calculate expected NGN value
+
   const numAmount = parseFloat(amount);
   const expectedNgn = !isNaN(numAmount) && currentRate ? numAmount * currentRate : 0;
-  
-  // Format message for WhatsApp/Telegram
+
   const message = `Hello Milly, I would like to *${tradeType.toUpperCase()}* ${amount || 0} ${crypto}.
 Rate: ₦${currentRate}/$
 Expected NGN: ₦${expectedNgn.toLocaleString()}
@@ -53,30 +61,32 @@ Expected NGN: ₦${expectedNgn.toLocaleString()}
 Please process my transaction.`;
 
   const encodedMessage = encodeURIComponent(message);
-  
   const whatsappUrl = `https://wa.me/2347077719341?text=${encodedMessage}`;
   const telegramUrl = `https://t.me/bigmilly01?text=${encodedMessage}`;
 
   return (
-    <div className="w-full glass rounded-3xl p-6 md:p-10 border border-white/10 relative overflow-hidden" id="trade-form">
+    <div
+      className="w-full glass rounded-3xl p-6 md:p-10 border border-white/10 relative overflow-hidden"
+      id="trade-form"
+    >
       {/* Rate Display Banner */}
-      <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[var(--color-brand-cyan)]/20 to-[var(--color-brand-purple)]/20 border-b border-white/5 p-3 flex justify-center items-center gap-4 text-sm font-medium">
-        <span className="flex items-center gap-2">
+      <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[var(--color-brand-cyan)]/20 to-[var(--color-brand-purple)]/20 border-b border-white/5 p-3 flex flex-wrap justify-center items-center gap-3 text-sm font-medium">
+        <span className="flex items-center gap-2 shrink-0">
           <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
           Live Rates (NGN/$)
         </span>
         {loading ? (
           <RefreshCw className="w-4 h-4 animate-spin text-[var(--color-brand-silver)]" />
         ) : rates ? (
-          <div className="flex gap-4 overflow-x-auto whitespace-nowrap hide-scrollbar px-2">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
             <span className="text-[var(--color-brand-silver)]">
-              USDT: Buy ₦{rates["USDT"]?.buy} / Sell ₦{rates["USDT"]?.sell}
+              USDT: Buy <strong className="text-green-400">₦{rates["USDT"]?.buy}</strong> / Sell <strong className="text-red-400">₦{rates["USDT"]?.sell}</strong>
             </span>
             <span className="text-[var(--color-brand-silver)]">
-              BTC: Buy ₦{rates["BTC"]?.buy} / Sell ₦{rates["BTC"]?.sell}
+              BTC: Buy <strong className="text-green-400">₦{rates["BTC"]?.buy}</strong> / Sell <strong className="text-red-400">₦{rates["BTC"]?.sell}</strong>
             </span>
             <span className="text-[var(--color-brand-silver)]">
-              ETH: Buy ₦{rates["ETH"]?.buy} / Sell ₦{rates["ETH"]?.sell}
+              ETH: Buy <strong className="text-green-400">₦{rates["ETH"]?.buy}</strong> / Sell <strong className="text-red-400">₦{rates["ETH"]?.sell}</strong>
             </span>
           </div>
         ) : (
@@ -86,7 +96,7 @@ Please process my transaction.`;
         )}
       </div>
 
-      <div className="pt-12 space-y-8">
+      <div className="pt-16 space-y-8">
         <div>
           <h2 className="text-3xl font-black text-white mb-2">Trade Calculator</h2>
           <p className="text-[var(--color-brand-silver)]/80 text-sm">
@@ -97,7 +107,7 @@ Please process my transaction.`;
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Form Side */}
           <div className="space-y-6">
-            
+
             {/* Trade Type */}
             <div className="space-y-3">
               <label className="text-sm font-semibold text-white">I want to:</label>
@@ -106,8 +116,8 @@ Please process my transaction.`;
                   onClick={() => setTradeType("buy")}
                   className={cn(
                     "py-3 rounded-xl border font-bold transition-all",
-                    tradeType === "buy" 
-                      ? "bg-green-500/20 border-green-500/50 text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.2)]" 
+                    tradeType === "buy"
+                      ? "bg-green-500/20 border-green-500/50 text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.2)]"
                       : "bg-white/5 border-white/10 text-[var(--color-brand-silver)] hover:bg-white/10"
                   )}
                 >
@@ -117,8 +127,8 @@ Please process my transaction.`;
                   onClick={() => setTradeType("sell")}
                   className={cn(
                     "py-3 rounded-xl border font-bold transition-all",
-                    tradeType === "sell" 
-                      ? "bg-red-500/20 border-red-500/50 text-red-400 shadow-[0_0_15px_rgba(239,68,68,0.2)]" 
+                    tradeType === "sell"
+                      ? "bg-red-500/20 border-red-500/50 text-red-400 shadow-[0_0_15px_rgba(239,68,68,0.2)]"
                       : "bg-white/5 border-white/10 text-[var(--color-brand-silver)] hover:bg-white/10"
                   )}
                 >
@@ -134,7 +144,7 @@ Please process my transaction.`;
                 {(["USDT", "BTC", "ETH", "OTHERS"] as const).map((c) => (
                   <button
                     key={c}
-                    onClick={() => setCrypto(c)}
+                    onClick={() => setCryptoState(c)}
                     className={cn(
                       "py-2 px-1 text-xs sm:text-sm rounded-lg border font-medium transition-all text-center",
                       crypto === c
@@ -165,7 +175,6 @@ Please process my transaction.`;
                 />
               </div>
             </div>
-            
           </div>
 
           {/* Result Side */}
@@ -175,7 +184,7 @@ Please process my transaction.`;
                 <span className="text-[var(--color-brand-silver)]">Current Rate</span>
                 <span className="font-bold text-white text-xl">₦{currentRate || 0}/$</span>
               </div>
-              
+
               <div className="flex justify-between items-center pt-2">
                 <span className="text-[var(--color-brand-silver)] text-lg">
                   {tradeType === "buy" ? "You Pay (NGN)" : "You Receive (NGN)"}
@@ -187,16 +196,16 @@ Please process my transaction.`;
             </div>
 
             <div className="space-y-3 pt-4">
-              <Link 
-                href={whatsappUrl} 
-                target="_blank" 
+              <Link
+                href={whatsappUrl}
+                target="_blank"
                 className="w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-white bg-[#25D366] hover:bg-[#20bd5a] transition-all"
               >
                 Trade via WhatsApp <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link 
-                href={telegramUrl} 
-                target="_blank" 
+              <Link
+                href={telegramUrl}
+                target="_blank"
                 className="w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-white bg-[#0088cc] hover:bg-[#007ab8] transition-all"
               >
                 Trade via Telegram <ArrowRight className="w-5 h-5" />
@@ -207,4 +216,6 @@ Please process my transaction.`;
       </div>
     </div>
   );
-}
+});
+
+TradeForm.displayName = "TradeForm";

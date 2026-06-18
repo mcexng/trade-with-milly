@@ -47,10 +47,7 @@ export function Navbar() {
             src="/mcex-logo.png"
             alt="MCEX"
             className="h-10 sm:h-12 md:h-14 w-auto object-contain mix-blend-screen"
-            style={{
-              filter:
-                "invert(1) grayscale(1) contrast(200%) sepia(100%) saturate(280%) hue-rotate(350deg) brightness(1.3)",
-            }}
+            style={{ filter: "brightness(1.2) saturate(1.5)" }}
           />
         </Link>
 

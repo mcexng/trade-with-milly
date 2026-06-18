@@ -1,13 +1,29 @@
 "use client";
 
+import { useRef } from "react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { ArrowRight, CheckCircle2, Clock, ShieldCheck, Wallet } from "lucide-react";
-import Link from "next/link";
+import { CheckCircle2, Clock, ShieldCheck, Wallet } from "lucide-react";
 import { TradeForm } from "@/components/ui/TradeForm";
 
+type TradableCrypto = "USDT" | "BTC" | "ETH" | "OTHERS";
+
+const selectableCryptos: { symbol: TradableCrypto; label: string }[] = [
+  { symbol: "BTC", label: "BTC" },
+  { symbol: "ETH", label: "ETH" },
+  { symbol: "USDT", label: "USDT" },
+];
+
+const otherCryptos = ["USDC", "OTHERS"];
+
 export default function VendorPage() {
-  const cryptos = ["BTC", "ETH", "USDT", "BNB", "SOL", "XRP", "DOGE", "USDC"];
+  const tradeFormRef = useRef<{ setCrypto: (c: TradableCrypto) => void } | null>(null);
+  const tradeSectionRef = useRef<HTMLDivElement>(null);
+
+  const handleCryptoClick = (symbol: TradableCrypto) => {
+    tradeFormRef.current?.setCrypto(symbol);
+    tradeSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
     <div className="flex flex-col w-full pb-20">
@@ -33,18 +49,42 @@ export default function VendorPage() {
           <AnimatedSection>
             <h2 className="text-2xl font-bold text-center mb-8">Supported Cryptocurrencies</h2>
             <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
-              {cryptos.map((coin, i) => (
-                <div key={i} className="px-6 py-3 rounded-xl glass border border-white/10 text-lg font-bold hover:border-[var(--color-brand-cyan)] hover:text-[var(--color-brand-cyan)] transition-colors cursor-pointer">
-                  {coin}
-                </div>
+              {selectableCryptos.map((coin) => (
+                <button
+                  key={coin.symbol}
+                  onClick={() => handleCryptoClick(coin.symbol)}
+                  className="px-6 py-3 rounded-xl glass border border-white/10 text-lg font-bold hover:border-[var(--color-brand-cyan)] hover:text-[var(--color-brand-cyan)] hover:shadow-[0_0_15px_rgba(0,240,255,0.2)] transition-all cursor-pointer"
+                >
+                  {coin.label}
+                </button>
               ))}
-              <div className="px-6 py-3 rounded-xl glass border border-white/10 text-lg font-bold text-[var(--color-brand-silver)]/50">
-                + Many More
-              </div>
+              {otherCryptos.map((coin) => (
+                <button
+                  key={coin}
+                  onClick={() => handleCryptoClick("OTHERS")}
+                  className="px-6 py-3 rounded-xl glass border border-white/10 text-lg font-bold hover:border-[var(--color-brand-cyan)] hover:text-[var(--color-brand-cyan)] hover:shadow-[0_0_15px_rgba(0,240,255,0.2)] transition-all cursor-pointer"
+                >
+                  {coin}
+                </button>
+              ))}
             </div>
+            <p className="text-center text-[var(--color-brand-silver)]/50 text-sm mt-4">
+              Click any coin to jump to the trade calculator
+            </p>
           </AnimatedSection>
         </div>
       </section>
+
+      {/* Trade Form — immediately below Supported Cryptos */}
+      <div ref={tradeSectionRef} className="scroll-mt-24">
+        <section className="py-12 relative">
+          <div className="container mx-auto px-4 md:px-6 max-w-4xl">
+            <AnimatedSection>
+              <TradeForm ref={tradeFormRef} />
+            </AnimatedSection>
+          </div>
+        </section>
+      </div>
 
       {/* Why Choose Us */}
       <section className="py-20 relative">
@@ -95,15 +135,6 @@ export default function VendorPage() {
               </AnimatedSection>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Trade Form */}
-      <section className="py-24 relative">
-        <div className="container mx-auto px-4 md:px-6 max-w-4xl">
-          <AnimatedSection>
-            <TradeForm />
-          </AnimatedSection>
         </div>
       </section>
     </div>
