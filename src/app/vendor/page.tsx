@@ -4,6 +4,7 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { ArrowRight, CheckCircle2, Clock, ShieldCheck, Wallet } from "lucide-react";
 import Link from "next/link";
+import { TradeForm } from "@/components/ui/TradeForm";
 
 export default function VendorPage() {
   const cryptos = ["BTC", "ETH", "USDT", "BNB", "SOL", "XRP", "DOGE", "USDC"];
@@ -97,32 +98,11 @@ export default function VendorPage() {
         </div>
       </section>
 
-      {/* CTAs */}
+      {/* Trade Form */}
       <section className="py-24 relative">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6 max-w-4xl">
           <AnimatedSection>
-            <GlassCard className="max-w-4xl mx-auto p-12 text-center relative overflow-hidden" glow glowColor="cyan">
-              <div className="absolute top-0 right-0 p-4">
-                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/20 border border-green-500/30">
-                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-xs font-medium text-green-400">Online Now</span>
-                </div>
-              </div>
-              
-              <h2 className="text-3xl md:text-5xl font-black mb-6">Ready to Trade?</h2>
-              <p className="text-xl text-[var(--color-brand-silver)]/80 mb-10 max-w-2xl mx-auto">
-                Message Milly directly to process your cryptocurrency transactions instantly and securely.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Link href="https://wa.me/2347077719341" target="_blank" className="px-8 py-4 rounded-full font-bold text-white bg-[#25D366] hover:bg-[#20bd5a] transition-colors flex items-center justify-center gap-2">
-                  Trade via WhatsApp
-                </Link>
-                <Link href="https://t.me/bigmilly01" target="_blank" className="px-8 py-4 rounded-full font-bold text-white bg-[#0088cc] hover:bg-[#007ab8] transition-colors flex items-center justify-center gap-2">
-                  Trade via Telegram
-                </Link>
-              </div>
-            </GlassCard>
+            <TradeForm />
           </AnimatedSection>
         </div>
       </section>

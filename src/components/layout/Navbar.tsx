@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Vendor", href: "/vendor" },
+  { name: "Vendor", href: "/vendor#trade-form" },
   { name: "Signals", href: "/signals" },
   { name: "Academy", href: "/academy" },
   { name: "Market", href: "/market" },
@@ -62,7 +62,7 @@ export function Navbar() {
               href={link.href}
               className={cn(
                 "text-sm font-medium transition-colors hover:text-[#d4af37]",
-                pathname === link.href
+                (pathname === link.href || (link.name === "Vendor" && pathname === "/vendor"))
                   ? "text-[#d4af37]"
                   : "text-[var(--color-brand-silver)]"
               )}
@@ -113,7 +113,7 @@ export function Navbar() {
                 href={link.href}
                 className={cn(
                   "px-4 py-3 text-sm font-medium rounded-xl transition-colors",
-                  pathname === link.href
+                  (pathname === link.href || (link.name === "Vendor" && pathname === "/vendor"))
                     ? "bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30"
                     : "text-[var(--color-brand-silver)] hover:bg-white/5"
                 )}
