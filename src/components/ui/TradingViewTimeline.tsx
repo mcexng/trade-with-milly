@@ -25,10 +25,10 @@ export function TradingViewTimeline() {
       "https://s3.tradingview.com/external-embedding/embed-widget-timeline.js";
     script.async = true;
     script.textContent = JSON.stringify({
-      displayMode: "adaptive",
+      displayMode: "regular",
       feedMode: "all_symbols",
       colorTheme: "dark",
-      isTransparent: false,
+      isTransparent: true,
       locale: "en",
       width: "100%",
       height: "100%",

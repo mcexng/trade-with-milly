@@ -122,8 +122,8 @@ export default function MarketPage() {
 
               {/* TradingView Timeline Widget */}
               <AnimatedSection delay={0.1}>
-                <GlassCard className="p-1 h-[550px] relative overflow-hidden" glow glowColor="neon">
-                  <div className="w-full h-full rounded-2xl overflow-hidden">
+                <GlassCard className="p-0 h-[750px] relative overflow-hidden" glow glowColor="neon">
+                  <div className="w-full h-full rounded-2xl overflow-hidden bg-transparent">
                     <TradingViewTimeline />
                   </div>
                 </GlassCard>
