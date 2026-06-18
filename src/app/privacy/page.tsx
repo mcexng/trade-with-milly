@@ -23,7 +23,7 @@ export default function PrivacyPolicyPage() {
           <AnimatedSection>
             <div className="glass p-8 md:p-12 rounded-3xl border border-white/10 space-y-6 text-[var(--color-brand-silver)] leading-relaxed">
               <p>
-                At Trade With Milly (MCEX), we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your personal information when you use our services.
+                At Milly Crypto Exchange (MCEX), we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your personal information when you use our services.
               </p>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">Information We Collect</h2>
               <p>

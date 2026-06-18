@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Camera, Video, AtSign, Send, MessageCircle } from "lucide-react";
+import { Send, MessageCircle } from "lucide-react";
+import { FaInstagram, FaTiktok, FaFacebook, FaTelegramPlane } from "react-icons/fa6";
 
 export function Footer() {
   return (
@@ -27,28 +28,28 @@ export function Footer() {
                 target="_blank"
                 className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#d4af37]/20 hover:border-[#d4af37]/40 border border-white/10 transition-colors"
               >
-                <Camera className="w-4 h-4 text-[var(--color-brand-silver)]" />
+                <FaInstagram className="w-4 h-4 text-[var(--color-brand-silver)]" />
               </Link>
               <Link
                 href="https://tiktok.com/@mcex.ng"
                 target="_blank"
                 className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#d4af37]/20 hover:border-[#d4af37]/40 border border-white/10 transition-colors"
               >
-                <Video className="w-4 h-4 text-[var(--color-brand-silver)]" />
+                <FaTiktok className="w-4 h-4 text-[var(--color-brand-silver)]" />
               </Link>
               <Link
                 href="https://facebook.com/millycryptoexchange"
                 target="_blank"
                 className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#d4af37]/20 hover:border-[#d4af37]/40 border border-white/10 transition-colors"
               >
-                <AtSign className="w-4 h-4 text-[var(--color-brand-silver)]" />
+                <FaFacebook className="w-4 h-4 text-[var(--color-brand-silver)]" />
               </Link>
               <Link
                 href="https://t.me/mcex_ng"
                 target="_blank"
                 className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#d4af37]/20 hover:border-[#d4af37]/40 border border-white/10 transition-colors"
               >
-                <Send className="w-4 h-4 text-[var(--color-brand-silver)]" />
+                <FaTelegramPlane className="w-4 h-4 text-[var(--color-brand-silver)]" />
               </Link>
             </div>
           </div>

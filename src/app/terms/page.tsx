@@ -23,7 +23,7 @@ export default function TermsOfServicePage() {
           <AnimatedSection>
             <div className="glass p-8 md:p-12 rounded-3xl border border-white/10 space-y-6 text-[var(--color-brand-silver)] leading-relaxed">
               <p>
-                Welcome to Trade With Milly (MCEX). By accessing our website, purchasing crypto assets, or subscribing to our trading signals and academy, you agree to be bound by these Terms of Service.
+                Welcome to Milly Crypto Exchange (MCEX). By accessing our website, purchasing crypto assets, or subscribing to our trading signals and academy, you agree to be bound by these Terms of Service.
               </p>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">Eligibility & Conduct</h2>
               <p>
