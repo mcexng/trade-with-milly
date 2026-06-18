@@ -28,10 +28,10 @@ export function TradingViewTimeline() {
       displayMode: "regular",
       feedMode: "all_symbols",
       colorTheme: "dark",
-      isTransparent: true,
+      isTransparent: false,
       locale: "en",
       width: "100%",
-      height: "100%",
+      height: 750,
     });
     containerRef.current.appendChild(script);
   }, []);
