@@ -111,7 +111,7 @@ export default function SignalsPage() {
                   ))}
                 </ul>
 
-                <Link href="/payment" className="w-full py-4 rounded-xl font-bold text-white bg-gradient-to-r from-[var(--color-brand-purple)] to-[var(--color-brand-cyan)] hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(124,58,237,0.3)]">
+                <Link href="https://t.me/bigmilly01?text=I%20want%20to%20subscribe%20to%20premium%20vip%20signals." target="_blank" className="w-full py-4 rounded-xl font-bold text-white bg-gradient-to-r from-[var(--color-brand-purple)] to-[var(--color-brand-cyan)] hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(124,58,237,0.3)]">
                   Subscribe Now <ArrowRight className="w-5 h-5" />
                 </Link>
               </GlassCard>
